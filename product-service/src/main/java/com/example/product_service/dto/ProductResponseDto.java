@@ -1,11 +1,17 @@
 package com.example.product_service.dto;
 
 import com.example.product_service.model.Enums.Availability;
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProductResponseDto {
     private Long productId;
     private String productName;

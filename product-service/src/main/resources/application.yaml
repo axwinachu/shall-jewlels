@@ -3,7 +3,7 @@ spring:
     name: product-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/shaa_jewels
+    url: jdbc:mysql://localhost:3306/shaa_jewels_db
     username: root
     password: 2465
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,3 +16,5 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8080
