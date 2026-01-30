@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
     private final ProductFacade productFacade;
     @GetMapping

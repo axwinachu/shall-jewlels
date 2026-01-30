@@ -12,22 +12,23 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
     @Column(nullable = false)
     private Long productId;
 
     @Column(nullable = false)
-    private Integer quantity;
+    private Long quantity;
 
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
-
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
 }

@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,6 +33,7 @@ public class Cart {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<CartItem> items;
+    @Builder.Default
+    private List<CartItem> items=new ArrayList<>();
 }
 
