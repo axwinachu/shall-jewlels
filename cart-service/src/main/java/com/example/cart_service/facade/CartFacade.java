@@ -63,7 +63,7 @@ public class CartFacade {
                 .orElseThrow(()->new RuntimeException("Cart Not found"));
 
         List<Long> productIds=cart.getItems().stream().map(CartItem::getProductId).toList();
-        List<CartItemResponse> cartItems=productClientService.
-
+//        List<CartItemResponse> cartItems=productClientService.
+        return new CartResponse();
     }
 }
