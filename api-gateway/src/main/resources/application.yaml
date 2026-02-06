@@ -15,6 +15,32 @@ spring:
               uri: lb://product-service
               predicates:
                 - Path=/products/**
+              filters:
+                - JwtAuth
+
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/auth/**
+
+            - id: cart-service
+              uri: lb://cart-service
+              predicates:
+                - Path=/cart/**
+              filters:
+                  - JwtAuth
+
+security:
+  roles:
+    ADMIN:
+      - path: /**
+        methods: [GET, POST, PUT, DELETE]
+
+    USER:
+      - path: /products/*
+        methods: [GET]
+      - path: /cart/**
+        methods: [GET,POST,PUT,DELETE]
 
 server:
   port: 8888
@@ -29,3 +55,4 @@ management:
     web:
       exposure:
         include: health,info,gateway
+

@@ -16,12 +16,11 @@ import javax.print.attribute.standard.Sides;
 @Component
 @RequiredArgsConstructor
 public class AuthMapper {
-    private final PasswordEncoder passwordEncoder;
     public User signUpDtoToUser(SignupDto dto){
        return User.builder()
                 .username(dto.getUsername())
                 .email(dto.getEmail())
                 .role(Role.USER)
-                .password(passwordEncoder.encode(dto.getPassword())).build();
+                .password(dto.getPassword()).build();
     }
 }

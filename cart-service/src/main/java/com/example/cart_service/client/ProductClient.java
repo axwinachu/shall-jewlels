@@ -1,6 +1,5 @@
 package com.example.cart_service.client;
 
-import com.example.cart_service.dto.CartItemResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,7 @@ public interface ProductClient {
     ProductResponse getProductById(@PathVariable Long id);
 
     @PostMapping("/products/list")
-    List<CartItemResponse> getCartProducts(@RequestBody List<Long> productIds);
+    List<com.example.cart_service.dto.ProductResponse> getCartProducts(@RequestBody List<Long> productIds);
 
     class ProductResponse{
         public Long productId;

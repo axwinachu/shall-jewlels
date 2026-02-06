@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     private final ProductFacade productFacade;
-    @GetMapping
+    @GetMapping("/all")
     public List<ProductResponseDto> getAllProduct(){
         return productFacade.getAllProduct();
     }

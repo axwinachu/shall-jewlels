@@ -27,6 +27,7 @@ public class UserFacade {
             throw new UserAlreadyExist("Email already exist");
         }
         User user=mapper.signUpDtoToUser(signupDto);
+        user.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         userService.save(user);
         return new SignupResponse("SIGN_UP_SUCCESSFULLY",signupDto.getUsername()+"signup successfully");
     }
