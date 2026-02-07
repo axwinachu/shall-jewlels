@@ -11,8 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderCreateEvent {
-    private Long orderId;
-    private Long userId;
-    private BigDecimal totalAmount;
-    private List<OrderItemDto> items;
+    private String name;
+    private String address;
+    private String email;
 }

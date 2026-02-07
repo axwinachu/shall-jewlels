@@ -1,9 +1,8 @@
 package com.example.order_service.controller;
 
-import com.example.order_service.dto.CartResponse;
+import com.example.order_service.dto.OrderCreateEvent;
 import com.example.order_service.dto.OrderDto;
 import com.example.order_service.facade.OrderFacade;
-import com.example.order_service.model.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +14,8 @@ import java.util.List;
 public class OrderController {
     private final OrderFacade orderFacade;
     @PostMapping("/place-order")
-    public String placeOrder(@RequestHeader("X-USER-ID") Long userId){
-        return orderFacade.placeOrder(userId);
+    public String placeOrder(@RequestHeader("X-USER-ID") Long userId, @RequestBody OrderCreateEvent orderRequest){
+        return orderFacade.placeOrder(userId,orderRequest);
     }
     @GetMapping("/view")
     public List<OrderDto> viewOrder(@RequestHeader("X-USER-ID") Long userId){

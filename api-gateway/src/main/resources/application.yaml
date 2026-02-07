@@ -29,6 +29,13 @@ spring:
                 - Path=/cart/**
               filters:
                   - JwtAuth
+                  -
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/order/**
+              filters:
+                - JwtAuth
 
 security:
   roles:
@@ -40,6 +47,8 @@ security:
       - path: /products/*
         methods: [GET]
       - path: /cart/**
+        methods: [GET,POST,PUT,DELETE]
+      - path: /order/**
         methods: [GET,POST,PUT,DELETE]
 
 server:

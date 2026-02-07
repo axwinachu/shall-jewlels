@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductFacade {
     private final ProductService productService;
+
     private final Mapper mapper;
     public List<ProductResponseDto> getAllProduct() {
         return productService.getAllProduct().stream().map(mapper::productToProductResponseDto).toList();
