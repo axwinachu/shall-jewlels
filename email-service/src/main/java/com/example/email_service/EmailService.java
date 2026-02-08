@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.HashMap;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 @RequiredArgsConstructor
@@ -26,6 +27,8 @@ public class EmailService {
                 message.setSubject("shaa jewels");
                 message.setText(map.get("name")+"your order has been placed successfully address"+map.get("address"));
                 javaMailSender.send(message);
+                CompletableFuture<Integer> cf=new CompletableFuture<>();
+                cf.thenAccept(()
             }
             catch (Exception ex){
                 throw  new RuntimeException(ex.getMessage());

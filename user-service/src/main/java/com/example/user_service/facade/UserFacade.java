@@ -13,6 +13,7 @@ import com.example.user_service.response.SignupResponse;
 import com.example.user_service.security.JwtUtil;
 import com.example.user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
