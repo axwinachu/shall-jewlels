@@ -18,6 +18,8 @@ public class ProductController {
     }
     @GetMapping("/{id}")
     public ProductResponseDto getProductById(@PathVariable Long id){
+
+        System.out.println("hitting");
         return productFacade.getProductById(id);
     }
     @PostMapping("/list")
