@@ -1,24 +1,80 @@
 spring:
   application:
     name: user-service
+  ai:
+    openai:
+      api-key:
+      chat:
+        options:
+          model: gpt-4.1-mini
 
+  # ===============================
+  # DATABASE CONFIGURATION
+  # ===============================
   datasource:
-    url:  jdbc:mysql://localhost:3306/shaa_jewels_db
+    url: jdbc:mysql://localhost:3306/shaa_jewels_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 2465
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      pool-name: UserServiceHikariPool
+
+  # ===============================
+  # JPA / HIBERNATE
+  # ===============================
   jpa:
     hibernate:
       ddl-auto: update
-      show-sql: true
-      properties:
-        hibernates:
-          format_sql: true
-          dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true   # change to false in production
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  # ===============================
+  # OAUTH2 (GITHUB LOGIN)
+  # ===============================
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID:Ov23li50yShR7PwiJFNG}
+            client-secret: ${GITHUB_CLIENT_SECRET:c56ff8e34b7f1beec16faac6fabd34707913b8b9}
+            scope:
+              - read:user
+              - user:email
+
+# ===============================
+# SERVER CONFIG
+# ===============================
 server:
   port: 8084
+  forward-headers-strategy: framework
+
+# ===============================
+# EUREKA CLIENT CONFIG (VERY IMPORTANT FIX)
+# ===============================
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
+
+# ===============================
+# ACTUATOR (OPTIONAL BUT GOOD)
+# ===============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

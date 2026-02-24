@@ -2,6 +2,7 @@ package com.example.order_service.client;
 
 import com.example.order_service.dto.CartResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -9,4 +10,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface CartClient {
     @GetMapping("/cart/view")
     CartResponse getCartByUserId(@RequestHeader("X-USER-ID") Long userId);
+
+    @DeleteMapping("/cart/clear")
+    String clearCart(@RequestHeader("X-USER-ID") Long userId);
+
 }

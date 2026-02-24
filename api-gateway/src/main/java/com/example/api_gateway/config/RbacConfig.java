@@ -16,6 +16,6 @@ public class RbacConfig {
     @Data
     public static class Rule {
         private String path;
-        private List<String> methods; // ← IMPORTANT
+        private List<String> methods;
     }
 }

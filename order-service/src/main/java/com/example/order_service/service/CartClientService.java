@@ -13,4 +13,7 @@ public class CartClientService {
     public CartResponse getCartByUserId(Long userId){
         return cartClient.getCartByUserId(userId);
     }
+    public String clearCart(Long userId){
+        return cartClient.clearCart(userId);
+    }
 }

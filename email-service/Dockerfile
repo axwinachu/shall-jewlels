@@ -1,4 +1,6 @@
-FROM ubuntu:latest
-LABEL authors="ceasw"
+FROM openjdk:22-jdk
+WORKDIR /app
+COPY target/email-service-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8089
 
-ENTRYPOINT ["top", "-b"]
+ENTRYPOINT ["java", "-jar","app.jar"]

@@ -48,5 +48,7 @@ public class UserFacade {
         return new LoginResponse(ExceptionMessages.LOGIN_SUCCESS.name(), jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole().name()));
     }
 
+
+
 }
 

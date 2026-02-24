@@ -12,6 +12,7 @@ import com.example.cart_service.model.CartItem;
 import com.example.cart_service.service.CartItemService;
 import com.example.cart_service.service.CartService;
 import com.example.cart_service.service.ProductClientService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -120,7 +121,7 @@ public class CartFacade {
         cartItemService.delete(cartItem);
         return "deleted successfully";
     }
-
+    @Transactional
     public String clearCart(Long userId) {
         Cart cart=cartService.findCartByUserId(userId)
                 .orElseThrow(()->new CartNotFound("cart Not found userId:"+userId));

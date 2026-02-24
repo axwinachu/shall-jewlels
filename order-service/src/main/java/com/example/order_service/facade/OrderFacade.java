@@ -13,14 +13,17 @@ import com.example.order_service.model.Order;
 import com.example.order_service.model.OrderItem;
 import com.example.order_service.service.CartClientService;
 import com.example.order_service.service.OrderService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 @RequiredArgsConstructor
@@ -29,6 +32,7 @@ public class OrderFacade {
     private final OrderMapper orderMapper;
     private final CartClientService cartClientService;
     private final KafkaTemplate<String, Map<String,Object>> kafkaTemplate;
+    @Transactional
     public String placeOrder(Long userId, OrderCreateEvent orderCreateEvent) {
         Map<String,Object> map=new HashMap<>();
         CartResponse cart=cartClientService.getCartByUserId(userId);
@@ -53,8 +57,15 @@ public class OrderFacade {
         map.put("name",orderCreateEvent.getName());
         map.put("email",orderCreateEvent.getEmail());
         map.put("address",orderCreateEvent.getAddress());
-        kafkaTemplate.send("my-order-3",map);
-
+        CompletableFuture<SendResult<String, Map<String, Object>>> send=kafkaTemplate.send("my-order-3",map);
+        send.whenComplete(((stringMapSendResult, throwable) ->{
+            if(throwable==null){
+                System.out.println("send successfully");
+            }else{
+                throw new RuntimeException(throwable.getMessage());
+            }
+        } ));
+        System.out.println(cartClientService.clearCart(userId));
         return ResponseMessages.ORDER_PLACED_SUCCESSFULLY.name();
 
     }

@@ -2,10 +2,11 @@ package com.example.api_gateway.exception;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.awt.print.Pageable;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidToken.class)
     public Response handleInvalidToke(Exception ex) {
